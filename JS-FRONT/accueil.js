@@ -4,7 +4,7 @@ async function getdata() {
     try {
         let reponse = await fetch("http://localhost:3000/api/teddies")
         let data = await reponse.json()
-        datacards(data)
+        datacards(data) 
     } catch (error) {
         products.textContent = "il y a un problème"
         console.log(erreur)

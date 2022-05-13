@@ -6,7 +6,7 @@ function clearend() {
     localStorage.removeItem("contact")
     localStorage.removeItem("arraysend")
     window.location.href = "index.html"
-}
+} 
 function main() {
     let sommeTotal = JSON.parse(localStorage.getItem("sommeTotal"));
     orderId = localStorage.getItem("orderId")

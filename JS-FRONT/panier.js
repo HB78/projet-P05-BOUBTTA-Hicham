@@ -9,7 +9,7 @@ let nom = document.getElementById("lastname");
 let lieu = document.getElementById("adress");
 let ville = document.getElementById("city");
 let mail = document.getElementById("mail");
-let phone = document.getElementById("phone");
+let phone = document.getElementById("phone"); 
 
 /*fonction pour envoyer les info avec fetch-post*/
 function postapi() {

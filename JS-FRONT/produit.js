@@ -3,7 +3,7 @@ let params = (new URL(document.location)).searchParams;
 
 //STOCK L ID
 const id = params.get("id");
-
+ 
 //EMPLACEMENT HTML
 let teddies = document.querySelector("#teddies")
 /*iteration sur les options couleurs*/
