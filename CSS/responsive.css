@@ -1,0 +1,78 @@
+/*smartphone*/
+@media (min-width:320px) and (max-width:767px) {
+header > div > img {
+    height: 48%;
+    width: 100%;
+}
+nav > a {
+    font-size: 18px;
+    padding-right: 0.5rem;
+}
+.banniere-text {
+    width:85%;
+}
+.banniere-text2 > p {
+    display: none;
+}
+ #products {
+     display: flex;
+     flex-direction: column;
+     flex-wrap: wrap;
+     align-items: center;
+     width: 90%;
+     padding: 0%;
+ }
+ .productCard {
+     width: 90%;
+     margin-bottom: 1rem;
+     padding: 0%;
+ }
+ .peluche-description {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-size: 15px;
+ }
+ #paniers {
+    font-size: 3.2vw;
+    margin-top: 3%;
+    padding: 3.5%;
+    width: 68%;
+ }
+ #teddies {
+    display: flex;
+    width: 95%;
+    border: 1px solid transparent;
+    justify-content: center;
+    align-items: center;
+}
+#clearall {
+    width:40%;
+}
+form {
+    width: 88%;
+}
+#tableproduct{
+    padding:0;
+}
+#btnback {
+    width: 78%;
+}
+}
+/*tablette*/
+@media (min-width:768px) and (max-width:1200px) {
+.productCard {
+    width: 39%;
+}
+form {
+    width: 88%;
+}
+
+}
+/*reglage du responsive du texte contenus dans les cards de la page d'accueil*/
+
+@media (min-width:768px) and (max-width:895px) {
+.description {
+    font-size: 14px;
+}
+}

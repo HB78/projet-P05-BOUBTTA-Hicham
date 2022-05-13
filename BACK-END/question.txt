@@ -1,0 +1,81 @@
+A quoi sert le asynch puisque lorsque je l'enleve cela marche toujours ?
+A quoi sa sert de retourner le fetch dans la fonction ?
+
+suis-je obligé de me connecter à l'API à chaque page que je créer ?
+
+*********************JS********************
+
+le probleme du bouton supprimer
+
+l'ajout d'un meme produit depuis la page d'accueil
+
+la probleme de la methode Post
+
+la gestion de la page de confirmation
+function postapi() {
+  let contact = {
+     firstName : document.getElementById("firstname").value, 
+     lastName : document.getElementById("lastname").value,
+     address :  document.getElementById("adress").value,
+     city : document.getElementById("city").value,
+     email : document.getElementById("mail").value
+    //  phone : document.getElementById("phone").value
+    }
+    let products = ['5be9c8541c9d440000665243']
+    console.log(contact)
+    //envoie du panier et du formulaire dans le serveur avec fecth et post//
+    const arraysend = {
+      contact,
+      products
+    }
+    console.log(arraysend)
+    localStorage.setItem("arraysend", JSON.stringify(arraysend))
+    
+    let sendpost = {
+      method: 'POST',
+      headers: {'Content-Type': "application/json"},
+      mode: "cors",
+      body: JSON.stringify(arraysend)
+    }
+    fetch ("http://localhost:3000/api/teddies/order", sendpost) 
+    .then(res => res.json())
+    .then(data => {
+      location.replace('confirmation.html')
+    })
+    .catch( (err) => {
+      console.log("fetch Error",err);
+    });
+}
+function delIndexPanier(index) {
+  panier.splice(index, 1);
+  localStorage.setItem("panier", JSON.stringify(panier));
+  window.location.href = "panier.html";
+}
+
+l'iteration sur les couleurs qui ne fonctionnent pas.
+le bouton commander qui ne devraient pas s'activer si les champs ne sont pas remplis.
+qu'est ce que tu rajouterais pour finaliser le projet ?
+
+********************************************************************
+
+Je ne comprends plus le fonctionnent du search params
+
+comment ai je fait pour créer une variable (produit.totalprice) paradoxalement totalprice se 
+trouve dans le localStorage alors que je ne l'ai jamais tapé
+
+différence entre .map et foreach
+
+quelle est meilleure méthode pour faire un fetch ?
+Peut on faire appelle à une fonction dans le fetch ? Est-ce une bonne pratique ?
+
+je n'arrive pas du tout à intégrer la logique des booléens 
+
+comment organiser les dossiers ?
+
+le bundler a t'il une utilité dans ce projet ?
+
+Sur quoi vais-je etre interrogé durant l'examen ?
+
+Faut il transpiler (babel) dans ce projet ?
+
+HEROKU ?

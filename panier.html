@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Orinoco entreprise thématique de e-commerce</title>
+  <link rel="stylesheet" href="CSS/style.css">
+  <link rel="stylesheet" media="(min-width:320px) and (max-width:2500px)" href="CSS/responsive.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+  <!-- Open Graph / Facebook -->
+  <!-- Open Graph / Facebook -->
+</head>
+
+<body>
+  <!--LOADINGPAGE-->
+  <!--LOADINGPAGE-->
+
+  <!--HEADER-->
+  <header>
+    <div><img class="logo" src="../images/logo.jpg" alt="logo du site"><a href="index.html">ORINOUNOURS</a></div>
+    <nav>
+      <a href="index.html">Accueil</a></nav>
+  </header>
+  <!--HEADER-->
+  
+  <main>
+    <div id="panier">
+      <table id="tableproduct">
+        <h2>Vos commandes</h2>
+        <thread>
+          <tr>
+            <th>
+              Produit
+            </th>
+            <th>
+              Quantité
+            </th>
+            <th>
+              Price
+            </th>
+            <th>
+              Total
+            </th>
+          </tr>
+        </thread>
+      </table>
+      <div class="clearall"><button id="clearall" onClick="viderPanier()"> Vider le panier </button></div>
+      <div id="facture"></div>
+
+      <h2 id="livraison">Livraison</h2>
+      <form id="form" method="POST">
+        <label for="name">Nom</label>
+        <small id="smallname"></small>
+        <input type="text" required id="lastname" placeholder="votre nom">
+
+        <label for="firstname">Prénom</label>
+        <small id="smallprenom"></small>
+        <input type="text" required id="firstname" placeholder="votre prénom">
+
+        <label for="adress">Adresse</label>
+        <small id="smalladress"></small>
+        <input type="text" id="adress" placeholder="votre adresse">
+
+        <label for="city">Ville</label>
+        <small id="smallcity"></small>
+        <input type="text" required id="city" placeholder="votre ville">
+
+        <label for="mail">Email</label>
+        <small id="smallmail"></small>
+        <input type="mail" required id="mail" placeholder="votre adresse email">
+
+        <label for="telephone">Numéro de téléphone</label>
+        <small id="smallphone"></small>
+        <input type="tel" id="phone" placeholder="numéro de téléphone" minlength="10" maxlength="10">
+
+        <div class="divbtn"><button id="commander">Commander</button></div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>Copyright-Tous droits réservés</p>
+  </footer>
+
+  <script src="/JS-FRONT/panier.js"></script>
+</body>
