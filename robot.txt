@@ -1,0 +1,6 @@
+user-agent : *
+disallow : confirmation.html
+disallow: panier.html
+sitemap : http://www.orinounours.com/sitemap.xml
+Noindex: confirmation.html
+Noindex: panier.html
