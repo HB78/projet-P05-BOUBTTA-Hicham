@@ -1,4 +1,6 @@
-
+let params = (new URL(document.location)).searchParams;
+const orderid = params.get("orderId");
+console.log("orderid", orderid);
 function clearend() {
     localStorage.removeItem("sommeTotal")
     localStorage.removeItem("panier")

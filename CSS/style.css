@@ -267,7 +267,7 @@ label {
     justify-content: center;
 }
 table {
-    width: 85%;
+    width: 95%;
     margin: auto;
 }
 /*#ffc107*/
@@ -286,6 +286,13 @@ td {
     background-color: #F3E9F1;
     padding: 1%;
     border-radius: 10px;
+}
+/*bouton plus et moins du panier pour augmenter la quantité des produits*/
+#plus {
+    margin-right: 3%;
+}
+#moins {
+    margin-left: 3%;
 }
 #clearall {
     width: 30%;

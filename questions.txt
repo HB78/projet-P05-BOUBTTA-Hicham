@@ -1,0 +1,19 @@
+reglée problème internal server : je n'arrive pas a recupérer l'orderID a 
+cause d'un problème avec POST.
+
+Le prix ne doit pas etre stocker dans le localStorage
+
+Ajouter la couleur des produits dans le panier : le tableau ne veut pas s'adapter.
+
+Revoir l'algo dans la page product, si un meme produit est deja dans le panier avec une couleur
+différente on le push.
+
+Sur la page Produit ainsi que sur la page Panier, il est possible de modifer la quantité d’un
+produit.
+
+Lors du passage de la commande, l’identifant de la commande est récupéré et affiché. Cet
+identifant doit être passé en paramètre de l’URL, il ne doit pas être stocké (localStorage).
+
+Le code utilise la création d’élément DOM avec document.createElement ou bien le concept
+d'interpolation avec le templating (avec innerHTML). Mais innerHTML ne doit pas être utilisé pour
+remplacer directement le contenu d’un élément avec une chaîne de caractères concaténée. 

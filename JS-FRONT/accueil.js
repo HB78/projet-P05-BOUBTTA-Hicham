@@ -7,7 +7,7 @@ async function getdata() {
         datacards(data) 
     } catch (error) {
         products.textContent = "il y a un problème"
-        console.log(erreur)
+        console.log("erreur")
     }
 }
 function datacards(data) {
