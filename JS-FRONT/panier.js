@@ -65,10 +65,10 @@ function postapi() {
         return;
       }
       orderId = data.orderId;
-      JSON.stringify(orderId)
-      console.log("orderId", orderId);
-      localStorage.setItem("orderId", orderId)
-      window.location.href = `confirmation.html?orderId=${orderId}&price=${totalPrice}`
+      // JSON.stringify(orderId)
+      // console.log("orderId", orderId);
+      // localStorage.setItem("orderId", orderId)
+      window.location.href = `confirmation.html?orderId=${orderId}`
     })
     .catch((err) => {
       console.log("fetch Error", err);
@@ -227,8 +227,8 @@ if (panier != null) {
       produitPanier.totalPrice = produitPanier.quantity * produitPanier.price;
       tableproduct.innerHTML += `
         <tr id="info">
-          <td>${produitPanier.name} ${produitPanier.color}</td>
-          <td><button id ="plus" onclick="moreProduct(${produitPanier.quantity})">-</button>${produitPanier.quantity}<button id= "moins">+</button></td>
+          <td>${produitPanier.name} / ${produitPanier.color}</td>
+          <td id="qtes"><button id ="plus" onclick="lessProduct(${index})">-</button>${produitPanier.quantity}<button id= "moins" onclick="moreProduct(${index})">+</button></td>
           <td>${produitPanier.price}.00 €</td>
           <td>${produitPanier.totalPrice}.00 €</td>
           <td><button id="supprimer" onClick="delIndexPanier(${index})"> <i class="fas fa-trash-alt"></i></button></td>
@@ -236,7 +236,7 @@ if (panier != null) {
       `;
       /* On ajoute le prix de l'objet (le prix total) au prix total */
       sommeTotal += produitPanier.totalPrice;
-      localStorage.setItem("sommeTotal", JSON.stringify(sommeTotal))
+      sessionStorage.setItem("sommeTotal", JSON.stringify(sommeTotal))
     });
     facture.innerHTML = "<div class='centerprice' >Le montant total est de : </div>" + sommeTotal + ".00 €";
 
@@ -268,7 +268,7 @@ if (panier != null) {
         postapi()
         return;
       }
-      alert("Merci de remplir le formulaire corectement");
+      alert("Merci de remplir le formulaire correctement");
     })
   }
 
@@ -284,9 +284,54 @@ if (panier != null) {
   pan.innerHTML += attention;
   pan.style.height = "88vh"
 }
-function moreProduct(id) {
-  let newQte = qte + 1;
-
-
-
+function moreProduct(produitIndex) {
+//panier.map((produit, index, array) => {
+        //console.log(produit.quantity, "avant")
+        let produit = panier[produitIndex];
+        let lessQte = produit.quantity++
+        console.log(produit.quantity, "après")
+        console.log(produit.index);
+        if(produit.quantity == 0){
+          delIndexPanier(produitIndex)
+        }
+        localStorage.setItem("panier", JSON.stringify(panier))
+        window.location.reload()
+     // })
 }
+
+function lessProduct(produitIndex){
+  console.log(panier);
+    let produit = panier[produitIndex];
+    console.log(produit.quantity, "avant")
+    //console.log(index, "ici")
+    let lessQte = produit.quantity--
+    console.log(produit.quantity, "après")
+    console.log(produit.index)
+    if(produit.quantity == 0){
+      delIndexPanier(produitIndex)
+    }
+    localStorage.setItem("panier", JSON.stringify(panier))
+    window.location.reload()
+}
+
+function lessProducts() {
+  console.log(panier[0], "regarder la")
+  for(let i = 0; i < panier.length; i++) {
+    if(panier[i].name == panier[i].color && panier[i].quantity == panier[i].id) {
+      panier.map((produit, index, array) => {
+        console.log(produit.quantity, "avant")
+        console.log(index, "ici")
+        let lessQte = produit.quantity--
+        console.log(produit.quantity, "après")
+        console.log(produit.index)
+        if(produit.quantity == 0){
+          delIndexPanier()
+        }
+        localStorage.setItem("panier", JSON.stringify(panier))
+        window.location.reload()
+        
+      })
+    }
+  }
+}
+
