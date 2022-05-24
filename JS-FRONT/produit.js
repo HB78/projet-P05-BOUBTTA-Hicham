@@ -15,7 +15,7 @@ function coloroption(data) {
   }
   return res;
 }
-
+//la fonction getdata va permettre de récupérer de façon asynchrone les donnéesde l'API avec la méthode fetch
 async function getdata() {
   try {
       let reponse = await fetch("http://localhost:3000/api/teddies/" + id);
@@ -47,36 +47,31 @@ function addproduct(name, price, id) {
 
   /* Algorithme */
   if (panier == null) {
-    console.log("Panier vide on le remplis pour la 1ere fois");
+    //"Panier vide on le remplis pour la 1ere fois"
     panier = [product]
     localStorage.setItem("panier", JSON.stringify(panier));
   }
   else {
     panier = JSON.parse(panier);
-    console.log("Panier déjà existant on rajoute des items")
+    //Panier déjà existant on rajoute des items
     let elemFind = false;
     panier.forEach((produitPanier, index) => {
       console.log("On vérifie si le nom de notre produit :> " + product.name + " Match avec un nom de produit dans le pannier :> " + produitPanier.name + " test numero :> " +  index)
       if (product.name == produitPanier.name && product.color == produitPanier.color && elemFind == false) {
         // si le produit existe déjà ajouté la qte choisis
-        console.log("ça match on ajoute la qte")
-        console.log("produitPanier.quantity = produitPanier.quantity + product.quantity;")
         produitPanier.quantity = produitPanier.quantity + product.quantity;
-        console.log(" produitPanier.name :>",  produitPanier.quantity , "nouvelle qte produitPanier.quantity :>", produitPanier.quantity)
         elemFind = true
       }
     })
     if (elemFind == false) { //si le produit n'est pas déjà dans le panier on l'ajoute dans l'array panier
-      console.log("Le produite est pas dans le pannier on le push");
-      console.log('taille panier avant :>> ', panier.length);
       panier.push(product);
-      console.log('taille panier apres :>> ', panier.length);
     }
 
     localStorage.setItem("panier", JSON.stringify(panier))
   }
   alert('Le produit a été ajouté au panier');
 }
+//fonction qui affiche le produit et les informations liées à celui-ci
 function produit(data) {
     let htmlStrpeluche = `
     <div class="peluche" id="cardsProduct">
@@ -100,5 +95,4 @@ function produit(data) {
   `;
   teddies.innerHTML = htmlStrpeluche;
 }
-
 getdata()

@@ -1,5 +1,7 @@
+//on récupère la div du HTML dans lequel on va injecter le contenu dynamique
 let products = document.querySelector("#products");
 
+//la fonction getdata va permettre de récupérer de façon asynchrone les donnéesde l'API avec la méthode fetch
 async function getdata() {
     try {
         let reponse = await fetch("http://localhost:3000/api/teddies")
@@ -10,6 +12,8 @@ async function getdata() {
         console.log("erreur")
     }
 }
+//la fonction datacards permet de générer les div dans lesquelles s'affichent les produits
+// elle utilise les données de l'API et une boucle pour itérer sur chaque produit
 function datacards(data) {
     for (let i = 0; i < data.length; i++) {
         products.innerHTML += `

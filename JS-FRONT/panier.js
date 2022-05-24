@@ -16,7 +16,7 @@ function postapi() {
   let adress = document.getElementById("adress").value
   let city = document.getElementById("city").value
   let email = document.getElementById("mail").value
-
+//on récupère les données utilisateur dans l'objet contact qui finira dans arraysen
   const contact = {
     firstName: firstname,
     lastName: lastname,
@@ -24,16 +24,21 @@ function postapi() {
     city: city,
     email: email
   }
+//on gère la condition ou il n'y aurait pas de panier ou si il est vide
   let panierString = localStorage.getItem("panier");
   if (!panierString) {
     alert("Panier Vide");
     return;
   }
+// On gère l'id ici, l'api veut reçevoir l'id des produit pour créer un orderID
+//on crée donc une variable ids avec un array vide qui contiendra les id des produits
   let products = JSON.parse(panierString);
   let ids = [];
   let totalPrice = 0;
   products.map((element, index, array) => {
     totalPrice = totalPrice + element.price * element.quantity;
+//tant que i est inférieur à la quantité des produits on ajoute le produit dans le array
+//autrement dit si il n'y pas ou plus de produit dans le panier on n'ajoute plus de id dans le array
     let i = 0;
     while (i < element.quantity) {
       ids.push(element.id)
@@ -47,27 +52,27 @@ function postapi() {
     products: ids,
   }
   console.log("array", arraysend)
+  //on envoie les données dans le localStorage qui sont regoupées dans arraysend
   localStorage.setItem("arraysend", JSON.stringify(arraysend))
+  //on crée un objet qui contient les données pour faire un post, on l'injectera dans le fetch
   let sendpost = {
     method: 'POST',
     headers: { 'Content-Type': "application/json" },
     mode: "cors",
     body: JSON.stringify(arraysend)
   }
+  //on ajouter order dans l'adresse de l'api pour récuperer l'orderID et on fait un fetch
+  //grace à l'objet sendpost le fetch est de type post, on envoie les données utilisateur à l'api
   fetch("http://localhost:3000/api/teddies/order", sendpost)
     .then(res => res.json())
     .then(data => {
       console.log("data", !data);
-      console.log('data.length :>> ', data.length);
       if (!data.orderId) {
         console.log("Erreur API");
         alert("Erreur server");
         return;
       }
       orderId = data.orderId;
-      // JSON.stringify(orderId)
-      // console.log("orderId", orderId);
-      // localStorage.setItem("orderId", orderId)
       window.location.href = `confirmation.html?orderId=${orderId}`
     })
     .catch((err) => {
@@ -90,7 +95,7 @@ function isFromValid() {
   return false;
 }
 
-/*un groupe de fonction pour effacer les produits du panier*/
+/*Fonction qui permet d'effacer un à un les produits du panier la méthode splice en utilisant l'index */
 function delIndexPanier(index) {
   panier.splice(index, 1);
   localStorage.setItem("panier", JSON.stringify(panier));
@@ -99,13 +104,14 @@ function delIndexPanier(index) {
     viderPanier()
   }
 }
-
+//Fonction qui permet de vider le panier en effaçant tout le localStorage
 function viderPanier() {
   localStorage.removeItem("panier");
   alert('le panier a été vidé');
   window.location.href = "panier.html";
 }
 /* DEBUT : un groupe de fonction qui verifie la validité des input du formulaire*/
+//fonction qui verifie la validité du nom dans l'input
 function validName(nom) {
   let nameRegex = new RegExp("[a-zA-Z]")
   let testname = nameRegex.test(nom.value)
@@ -124,6 +130,7 @@ function validName(nom) {
     nom.classList.add('badbox')
   }
 }
+//fonction qui verifie la validité du prénom dans l'input
 function validPrenom(prenom) {
   let prenomRegex = new RegExp("[a-zA-Z]")
   let testprenom = prenomRegex.test(prenom.value)
@@ -141,7 +148,7 @@ function validPrenom(prenom) {
     prenom.classList.add('badbox')
   }
 }
-
+//fonction qui verifie la validité du lieu dans l'input
 function validAdress(lieu) {
   let adressRegex = new RegExp("[a-zA-Z0-9.-]")
   let testadress = adressRegex.test(lieu.value)
@@ -158,7 +165,7 @@ function validAdress(lieu) {
     lieu.classList.add('badbox')
   }
 }
-
+//fonction qui verifie la validité de la ville dans l'input
 function validCity(ville) {
   let cityRegex = new RegExp("[a-zA-Z]")
   let testcity = cityRegex.test(ville.value)
@@ -175,7 +182,7 @@ function validCity(ville) {
     ville.classList.add('badbox')
   }
 }
-
+//fonction qui verifie la validité de l'adresse mail dans l'input
 function validEmail(mail) {
   let mailRegex = new RegExp("^[a-zA-Z0-9.-_]+[@]{1}[a-zA-Z0-9.-_]+[.]{1}[a-zA-Z]{2,10}$")
   let testmail = mailRegex.test(mail.value)
@@ -192,6 +199,7 @@ function validEmail(mail) {
     mail.classList.add('badbox')
   }
 }
+//fonction qui verifie la validité du numéro de téléphone dans l'input
 function validPhone(phone) {
   let phoneRegex = new RegExp("^[0-9]{10}$")
   let testphone = phoneRegex.test(phone.value)
@@ -216,6 +224,28 @@ function validPhone(phone) {
 }
 /* FIN : un groupe de fonction qui verifie la validité des input du formulaire*/
 
+//La fonction permet de diminuer la quantité des produits du panier 1à1 en cliquant sur le bouton -
+function lessProduct(produitIndex){
+  console.log(panier);
+    let produit = panier[produitIndex];
+    let lessQte = produit.quantity--
+    if(produit.quantity == 0){
+      delIndexPanier(produitIndex)
+    }
+    localStorage.setItem("panier", JSON.stringify(panier))
+    window.location.reload()
+}
+//La fonction permet d'augmenter la quantité des produits du panier 1à1 en cliquant sur le bouton +
+function moreProduct(produitIndex) {
+          let produit = panier[produitIndex];
+          let lessQte = produit.quantity++
+          if(produit.quantity == 0){
+            delIndexPanier(produitIndex)
+          }
+          localStorage.setItem("panier", JSON.stringify(panier))
+          window.location.reload()
+  }
+// si il y a un ou des produits dans le panier on lance la fonction principale
 if (panier != null) {
   function main() {
     let sommeTotal = 0;
@@ -271,8 +301,8 @@ if (panier != null) {
       alert("Merci de remplir le formulaire correctement");
     })
   }
-
-  main();
+main();
+//si il n'y a pas de produit dans le panier on indique un message pour guider l'utilisateur
 } else {
   let pan = document.getElementById("panier")
   let livraison = document.getElementById("livraison")
@@ -284,54 +314,3 @@ if (panier != null) {
   pan.innerHTML += attention;
   pan.style.height = "88vh"
 }
-function moreProduct(produitIndex) {
-//panier.map((produit, index, array) => {
-        //console.log(produit.quantity, "avant")
-        let produit = panier[produitIndex];
-        let lessQte = produit.quantity++
-        console.log(produit.quantity, "après")
-        console.log(produit.index);
-        if(produit.quantity == 0){
-          delIndexPanier(produitIndex)
-        }
-        localStorage.setItem("panier", JSON.stringify(panier))
-        window.location.reload()
-     // })
-}
-
-function lessProduct(produitIndex){
-  console.log(panier);
-    let produit = panier[produitIndex];
-    console.log(produit.quantity, "avant")
-    //console.log(index, "ici")
-    let lessQte = produit.quantity--
-    console.log(produit.quantity, "après")
-    console.log(produit.index)
-    if(produit.quantity == 0){
-      delIndexPanier(produitIndex)
-    }
-    localStorage.setItem("panier", JSON.stringify(panier))
-    window.location.reload()
-}
-
-function lessProducts() {
-  console.log(panier[0], "regarder la")
-  for(let i = 0; i < panier.length; i++) {
-    if(panier[i].name == panier[i].color && panier[i].quantity == panier[i].id) {
-      panier.map((produit, index, array) => {
-        console.log(produit.quantity, "avant")
-        console.log(index, "ici")
-        let lessQte = produit.quantity--
-        console.log(produit.quantity, "après")
-        console.log(produit.index)
-        if(produit.quantity == 0){
-          delIndexPanier()
-        }
-        localStorage.setItem("panier", JSON.stringify(panier))
-        window.location.reload()
-        
-      })
-    }
-  }
-}
-
