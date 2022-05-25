@@ -203,7 +203,7 @@ h5 {
 #paniers:hover {
     background-color: orange;
     transform: scale(0.98);
-    transition-duration: all 400ms;
+    transition-duration: 400ms;
 }
 .quantityx {
     margin: 0;
