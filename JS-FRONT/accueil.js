@@ -8,8 +8,7 @@ async function getdata() {
         let data = await reponse.json()
         datacards(data) 
     } catch (error) {
-        products.textContent = "il y a un problème"
-        console.log("erreur")
+        products.textContent = "Il y a un problème"
     }
 }
 //la fonction datacards permet de générer les div dans lesquelles s'affichent les produits

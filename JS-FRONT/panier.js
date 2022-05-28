@@ -16,7 +16,7 @@ function postapi() {
   let adress = document.getElementById("adress").value
   let city = document.getElementById("city").value
   let email = document.getElementById("mail").value
-//on récupère les données utilisateur dans l'objet contact qui finira dans arraysen
+//on récupère les données utilisateur dans l'objet contact qui finira dans arraysend
   const contact = {
     firstName: firstname,
     lastName: lastname,
@@ -121,9 +121,7 @@ function validName(nom) {
     smallname.style.color = "green"
     nom.classList.remove('badox')
     nom.classList.add('goodbox')
-    console.log('c super')
   } else {
-    console.log("zut")
     smallname.textContent = "ce champs ne doit contenir des lettres"
     smallname.style.color = "red"
     nom.classList.remove('goodbox')

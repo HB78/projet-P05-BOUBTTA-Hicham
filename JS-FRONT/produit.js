@@ -34,6 +34,10 @@ function addproduct(name, price, id) {
   /* Variable */
   let quantity = document.getElementById("quantity").value;
   quantity = parseInt(quantity)
+  if (isNaN(quantity)  || quantity < 1) {
+    alert("Veuillez entrer une quantité valide")
+    return
+  }
   const color = document.getElementById("color").value;
   let product = {
     quantity: quantity,
@@ -61,10 +65,14 @@ function addproduct(name, price, id) {
         // si le produit existe déjà ajouté la qte choisis
         produitPanier.quantity = produitPanier.quantity + product.quantity;
         elemFind = true
+        //localStorage.setItem("panier", JSON.stringify(panier))
+        //alert('La quantité de ce produit a été mise à jour');
       }
     })
     if (elemFind == false) { //si le produit n'est pas déjà dans le panier on l'ajoute dans l'array panier
       panier.push(product);
+      //localStorage.setItem("panier", JSON.stringify(panier))
+      //alert('Le produit a été ajouté au panier');
     }
 
     localStorage.setItem("panier", JSON.stringify(panier))
@@ -88,7 +96,7 @@ function produit(data) {
         </select>
         <p class="prix"> Prix Unitaire: ${data.price/ 100}€</p>
         <span class="quantityx">Quantité</span>
-        <input class="quantite" id="quantity"  type ="number" value="1" onFocus="this.value='1';" ><br>
+        <input class="quantite" id="quantity"  type ="number" min="1" value="1" onFocus="this.value='1';" ><br>
         <div class="btnsubmit"><button onclick="addproduct('${data.name}', ${data.price/100}, '${data._id}')" type ="submit" id="paniers" value="submit"> Ajouter au panier</button></div>
       </div>
     </div>
@@ -96,3 +104,7 @@ function produit(data) {
   teddies.innerHTML = htmlStrpeluche;
 }
 getdata()
+
+function isInputValid(input) {
+  let testInput = new RegExp("[1-9]").test(input);
+}
