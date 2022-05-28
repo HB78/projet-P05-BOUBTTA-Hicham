@@ -104,7 +104,3 @@ function produit(data) {
   teddies.innerHTML = htmlStrpeluche;
 }
 getdata()
-
-function isInputValid(input) {
-  let testInput = new RegExp("[1-9]").test(input);
-}
